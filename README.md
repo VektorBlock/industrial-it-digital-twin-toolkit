@@ -49,3 +49,9 @@ python3 -m streamlit run dashboard/app.py
 ## Purpose
 
 This project shows how IT conditions such as CPU load, network instability, and service availability can affect simulated industrial performance.
+
+## Documentation
+
+Full project manual available here:
+
+docs/project_manual.md
