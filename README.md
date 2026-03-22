@@ -37,19 +37,19 @@ This allows analysis of how infrastructure behavior influences production effici
 
 ```
 .
-├── src/
-│   └── simulator.py
-├── data/
+├── src/                 # core simulation logic (machine + IT behavior)
+│   └── simulator.py     # generates production dataset
+├── data/                # generated data (not versioned)
 │   └── production_data.csv
-├── dashboard/
-│   └── app.py
-├── screenshots/
+├── dashboard/           # Streamlit dashboard
+│   └── app.py           # visualization and KPI analysis
+├── screenshots/         # project images
 │   └── dashboard.png
-├── docs/
+├── docs/                # documentation
 │   └── project_manual.md
-├── README.md
-├── requirements.txt
-└── .gitignore
+├── README.md            # project overview
+├── requirements.txt     # dependencies
+└── .gitignore           # ignored files
 ```
 ---
 
