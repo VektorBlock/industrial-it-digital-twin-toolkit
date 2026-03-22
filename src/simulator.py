@@ -18,6 +18,27 @@ class MachineConfig:
     random_fault_prob: float = 0.015
 
 
+def choose_mode() -> None:
+    print("\nSelect simulation mode:")
+    print("1) Replicable (same data every run)")
+    print("2) Variable (different data every run)")
+
+    while True:
+        choice = input("\nEnter choice (1 or 2): ").strip()
+
+        if choice == "1":
+            random.seed(42)
+            print("\nMode selected: REPLICABLE (fixed seed = 42)")
+            break
+
+        if choice == "2":
+            random.seed()
+            print("\nMode selected: VARIABLE (different output at each run)")
+            break
+
+        print("Invalid choice. Please enter 1 or 2.")
+
+
 def simulate_it_metrics() -> dict:
     cpu = random.randint(35, 98)
     ram = random.randint(40, 92)
@@ -40,6 +61,7 @@ def determine_state(metrics: dict, config: MachineConfig) -> tuple[str, str]:
         return "FAULT", "SERVICE_DOWN"
 
     roll = random.random()
+
     if roll < config.random_fault_prob:
         return "FAULT", "RANDOM_FAULT"
 
@@ -81,10 +103,12 @@ def simulate_shift(config: MachineConfig) -> pd.DataFrame:
                 0,
                 int(config.ideal_units_per_min * performance_factor + random.randint(-1, 1))
             )
+
             scrap_units = sum(
                 1 for _ in range(produced_units)
                 if random.random() < config.scrap_rate_run
             )
+
             good_units = produced_units - scrap_units
         else:
             downtime_min = 1
@@ -144,7 +168,7 @@ def print_summary(df: pd.DataFrame) -> None:
 
 
 def main() -> None:
-    random.seed(42)
+    choose_mode()
 
     config = MachineConfig()
     df = simulate_shift(config)
