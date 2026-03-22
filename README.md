@@ -2,6 +2,10 @@
 
 Lightweight industrial monitoring and digital twin project built in Python.
 
+## Dashboard Preview
+
+![Dashboard](screenshots/dashboard.png)
+
 ## What this project does
 
 This project simulates a production machine and combines:
