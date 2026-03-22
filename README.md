@@ -35,6 +35,7 @@ This allows analysis of how infrastructure behavior influences production effici
 
 ## Project Structure
 
+```
 .
 ├── src/
 │   └── simulator.py
@@ -49,7 +50,7 @@ This allows analysis of how infrastructure behavior influences production effici
 ├── README.md
 ├── requirements.txt
 └── .gitignore
-
+```
 ---
 
 ## Installation
