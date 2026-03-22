@@ -7,7 +7,7 @@
 
 This project aims to simulate an industrial monitoring system using a Digital Twin approach.
 
-The goal is to model how IT conditions (CPU usage, network stability, system status) can directly impact industrial production performance.
+The goal is to model how IT conditions such as CPU load, network stability, and service availability can directly influence production performance.
 
 ---
 
@@ -47,7 +47,7 @@ The project is structured into three main layers:
 The simulated machine operates in different states:
 
 - RUN → normal production
-- STOP → planned stop
+- STOP → controlled stop
 - FAULT → unexpected issue
 
 Transitions between states are influenced by:
@@ -69,25 +69,28 @@ Main fields include:
 - stop_reason
 - cpu_percent
 - ram_percent
-- production
+- produced_units
 - good_units
 - scrap_units
+
+The dataset is not intended to be versioned permanently in the repository, but generated locally by running the simulator.
 
 ---
 
 ## 6. KPI Calculation
 
 ### Availability
-Ratio of operating time vs total time.
+Ratio of operating time versus total observed time.
 
 ### Performance
 Ratio between actual output and expected output.
 
 ### Quality
-Ratio of good units vs total produced units.
+Ratio of good units versus total produced units.
 
 ### OEE
 Overall Equipment Effectiveness:
+
 OEE = Availability × Performance × Quality
 
 ---
@@ -101,8 +104,7 @@ The system performs:
 - downtime analysis
 - correlation analysis (CPU vs production)
 
-Example:
-A negative correlation indicates that higher CPU load reduces production efficiency.
+A negative correlation indicates that higher CPU load can reduce production efficiency.
 
 ---
 
@@ -110,12 +112,12 @@ A negative correlation indicates that higher CPU load reduces production efficie
 
 The system generates:
 
-- system health status (OK, WARNING, CRITICAL)
+- system health status
 - alerts based on thresholds
 - insights describing system behavior
 
 Example:
-High downtime + high CPU = potential system overload
+High CPU load combined with reduced production may indicate overload conditions.
 
 ---
 
@@ -128,53 +130,105 @@ The Streamlit dashboard provides:
 - CPU vs production correlation
 - state distribution
 - downtime breakdown
-- real-time-like data table
+- data table
 
 ---
 
 ## 10. Results Interpretation
 
-Example output:
+Example output may include:
 
-- OEE: 75.91% → acceptable but improvable
-- Downtime: 36 minutes → moderate inefficiency
-- Main issue: NETWORK_DOWN
+- OEE around 75%
+- moderate downtime
+- network instability as a stop reason
 
-Interpretation:
-The system shows that IT instability can significantly affect production performance.
+This indicates a functioning system with room for performance improvement.
 
 ---
 
-## 11. Project Value
+## 11. How to Use the Project
+
+Requirements:
+
+- Python 3.x
+- pandas
+- streamlit
+
+Install dependencies:
+
+pip install -r requirements.txt
+
+Run the simulator:
+
+python3 src/simulator.py
+
+At startup, the simulator asks the user to choose the simulation mode:
+
+1 = Replicable mode  
+   generates the same data at each execution
+
+2 = Variable mode  
+   generates different data at each execution
+
+Replicable mode is useful for documentation and reproducible analysis.  
+Variable mode is useful for testing dynamic scenarios.
+
+The generated CSV file (`data/production_data.csv`) is overwritten at each execution and is intended to be created locally.
+
+Run the dashboard:
+
+python3 -m streamlit run dashboard/app.py
+
+Access through browser:
+
+http://localhost:8501
+
+---
+
+## 12. Compatibility
+
+The project is compatible with:
+
+- Linux
+- Windows
+- macOS
+
+Python installation is required.
+
+---
+
+## 13. Project Value
 
 This project demonstrates:
 
 - integration between IT and industrial systems
-- practical use of data analysis for operations
-- impact of infrastructure on production efficiency
+- practical use of data analysis
+- KPI-driven monitoring logic
+- the impact of IT infrastructure on production efficiency
 
 ---
 
-## 12. Limitations
+## 14. Limitations
 
-- simulated data (not real sensors)
+- simulated data
 - single machine model
 - no persistent database
+- no real-time integration
 
 ---
 
-## 13. Future Improvements
+## 15. Future Improvements
 
 - multi-machine simulation
-- real-time data ingestion
+- persistent database layer
 - anomaly detection
 - predictive maintenance models
-- database integration
+- IoT integration
 
 ---
 
-## 14. Conclusion
+## 16. Conclusion
 
-The project successfully demonstrates a simplified Digital Twin capable of linking IT conditions to industrial performance.
+The project demonstrates a simplified but coherent Digital Twin capable of linking IT conditions to industrial performance.
 
 It provides a foundation for more advanced industrial monitoring systems.
