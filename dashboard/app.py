@@ -350,7 +350,7 @@ def main() -> None:
         df = load_data(DATA_PATH)
     except FileNotFoundError as exc:
         st.error(str(exc))
-        st.info("Esegui prima il simulatore con: python3 src/simulator.py")
+        st.info("Run the simulator first:\n- Windows:       python src\\simulator.py\n- Linux / macOS: python3 src/simulator.py")
         return
 
     kpis = compute_kpis(df)
